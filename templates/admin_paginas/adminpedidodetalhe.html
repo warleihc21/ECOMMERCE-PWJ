@@ -1,0 +1,129 @@
+{% extends "admin_paginas/adminbase.html" %}
+
+{% block title %}
+    PWJ - Pedidos
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+
+                <div class="form-group col-md-6 ">
+                    <br>
+
+                    
+
+
+                    <h1 data-aos="fade-up">Detalhe</h1>
+                    <div class="container-fluid" data-aos="fade-up" data-aos-delay="400"></div>
+
+
+                    {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                            <div class="alert {{message.tags}}">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+
+                    <section>                   
+                    
+                        <h2 class="titulo">Detalhe do Pedido</h2>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <p><span class="font-weight-bold"></span><samp>Produto ID:   </samp><samp>Pedido_{{pedido_obj.id}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Status do pedido:   </samp><samp>{{pedido_obj.pedido_status}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Data do pedido:   </samp><samp>{{pedido_obj.criado_em}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Informação do cliente:   </samp><samp>{{pedido_obj.solicitante}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Telefone do cliente:   </samp><samp>{{pedido_obj.telefone}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Endereço do cliente:   </samp><samp>{{pedido_obj.endereco_envio}}</p></samp> 
+                                <p><span class="font-weight-bold"></span><samp>Email:   </samp><samp>{{pedido_obj.email}}</p></samp> 
+                                <hr>
+                                <h4 class="mt-4">Itens do Pedido</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Item</th>
+                                            <th>Valor</th>
+                                            <th>Quantidade</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cp in pedido_obj.carrinho.carrinhoproduto_set.all %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td><a target="blank" href="{% url 'loja_app:ProdutoDetalhe' cp.produto.slug %}">{{cp.produto.titulo}}{{cp.produto.id}}</a></td>
+                                            <td>R$ {{cp.valor}}</td>
+                                            <td>{{cp.quantidade}}</td>
+                                            <td>R$ {{cp.subtotal}}</td>
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <th colspan="4" class="text-aling-right">Valor Total:</th>
+                                            <th>R$ {{pedido_obj.total}}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <form action="{% url 'loja_app:adminpedidomudar' pedido_obj.id %}" method="POST">{% csrf_token %}
+                                    <select name="status">
+
+                                        {% for i, j in todosstatus %}
+
+                                        <option value="{{i}}"{% if i == pedido_obj.pedido_status %} selected {% endif %}>{{j}}</option>
+
+                                        {% endfor %}
+                                        
+
+                                    </select>
+                                    <button class="btn btn-success">Alterar Status</button>
+
+                                </form>
+                                
+
+                            </div>                                
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

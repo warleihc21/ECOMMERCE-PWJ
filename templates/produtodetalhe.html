@@ -1,0 +1,75 @@
+{% extends 'nav.html' %}
+
+{% load static %}
+
+{% load filters %}
+
+{% block title %}
+    PWJ-Personalizados - Login
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: rgb(3, 95, 0);
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio mt-5">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>{{produto.titulo}}</h2>
+          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
+        </div>
+
+
+
+            {% block content %}
+
+                          
+                <div class="container col-lg-12" data-aos="fade-up" data-aos-delay="400">                    
+                    <h4>Produto: {{produto.titulo}}</h4>  
+                    <div class="row">
+                        <div class="col-md-6"> 
+                          <img src="{{produto|get_first_imagem}}" class="img-fluid" width="100%">
+                        </div>
+                        <div class="col-md-6 text-lg-left">
+                          <h3>{{produto.titulo}} ( {{produto.visualizacao}} Visualizações)</h3>
+                          <h4>Categoria: {{produto.categoria}}</h4>
+                          <h5>Preço: <strike>R$ {{produto.preco_mercado}}</strike> R$ {{produto.venda}}</h5>
+                          <a href="{% url 'loja_app:addcarrinho' produto.id %}" class="btn btn-success">Comprar</a><hr>
+                          <p class="text-danger">Garantia: {{produto.garantia}}</p>
+                          <p class="text-danger">Politica de devolução: {{produto.return_devolucao}}</p><hr>
+                          <p class="text-success">Descrição: {{produto.descricao}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}   
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+
+{% endblock body %}

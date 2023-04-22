@@ -1,0 +1,88 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+    PWJ - Pesquisa
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+                <div class="form-group col-md-12 ">
+                    <br>
+                    <h1 data-aos="fade-up">Pesquisa de Produtos</h1>
+                    <div class="container-fluid" data-aos="fade-up" data-aos-delay="400"></div>
+
+
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" role="alert">
+                        <strong>{{message}}</strong>
+                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+
+
+                        <section>
+                    
+                    
+                            <h2>Resultado da pesquisa: <span class="text-success">"{{request.GET.keyword}}"</span></h2>
+                            <div class="row">
+                                <div class="col-lg-6 mx-auto">
+                                    {% for result in results %}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img src="{{result.imagem.url}}" class="img-fluid" alt="">
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <h4>Produto: <a href="{% url 'loja_app:ProdutoDetalhe' result.slug %}">{{result.titulo}}</a></h4>
+                                                <p>{{result.descricao | truncatewords:50}}</p>
+                                                <p>Política de devolução{{result.return_devolucao}}</p>
+                                                <a href="{% url 'loja_app:addcarrinho' result.id %}" class="btn btn-success">Comprar</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                
+                                </div>
+                            </div>
+
+
+                                    
+                        </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

@@ -1,0 +1,405 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'usuarios/css/css.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  <title>PWJ-Personalizados - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/logo/img1.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Vesperr - v4.10.0
+  * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="index.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{% url 'loja_app:index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'loja_app:sobre' %}">Sobre</a></li>
+          <li><a class="nav-link scrollto " href="{% url 'loja_app:TodosProdutos' %}">Todos os Produtos</a></li>
+          <li><a class="nav-link scrollto " href="{% url 'loja_app:meucarrinho' %}">Carrinho</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'loja_app:clienteregistrar' %}">Cadastrar</a></li>
+
+          {% if request.user.is_authenticated %}
+          <li><a class="nav-link scrollto" >Bem vindo {{ user.username }}</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'loja_app:clienteperfil' %}">Meu Perfil</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'loja_app:clientesair' %}">Sair</a></li>
+          {% else %}
+          <li><a class="nav-link scrollto" href="{% url 'loja_app:clienteentrar' %}">Login</a></li>    
+          {% endif %}
+          <div class="float-right">
+            <form action="{% url 'loja_app:pesquisar' %}" method="GET">
+              <input type="text" name="keyword" placeholder="Pesquisar Produtos" required>
+              <button class="btn btn-primary pull-right">Pesquisar</button>
+
+            </form>
+
+          </div>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+
+
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} mt-5" role="alert">
+                        <strong>{{message}}</strong>
+                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+
+      <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">Compre seus produtos personalizados online na PWJ-Personalizados!</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">Transforme suas ideias em produtos premium.</h2>
+          <div data-aos="fade-up" data-aos-delay="800">
+            <a href="{% url 'loja_app:TodosProdutos' %}" class="btn-get-started scrollto">Todos os Produtos</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+          <img src="{% static 'assets/img/logo/img1.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients clients">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-1.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-2.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-3.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-4.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-5.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6">
+            <img src="{% static 'assets/img/clients/client-6.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Testimonials</h2>
+          <p>Magnam dolores commodi suscipit eum quidem consectetur velit</p>
+        </div>
+        <div class="mw-100 align-self-start">
+          <div class="row">
+              <div class="col-md-12 capa">
+  
+                  <!--Carousel-->
+                  <div id="carousel-controles" class="carousel slide" data-ride="carousel"><!--Carousel -->
+                      <div class="carousel-inner"><!--Inner -->
+          
+                        <div class="carousel-item active">
+                          <img src="{% static 'assets/img/testimonials/banner-almofadas.jpg' %}" class="img-fluid" alt="">
+                        </div>
+          
+                        <div class="carousel-item">
+                          <img src="{% static 'assets/img/testimonials/banner-canecas.jpg' %}" class="img-fluid" alt="">
+                        </div>
+          
+                        <div class="carousel-item">
+                          <img src="{% static 'assets/img/testimonials/banner-garrafas.jpg' %}" class="img-fluid" alt="">
+                        </div>
+          
+                      </div><!--Inner -->
+          
+                      <!--Controles -->
+                      <a href="#carousel-controles" class="carousel-control-prev" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                      </a>
+          
+                      <a href="#carousel-controles" class="carousel-control-next" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                      </a>
+          
+                  </div><!--Carousel -->
+              </div>
+          </div>
+      </div>
+
+
+
+        
+
+
+
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Produtos</h2>
+          <p>Veja a listagem de nossos produtos abaixo!</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">Todos</li>
+              <li data-filter=".filter-porcelana">Porcelana</li>
+              <li data-filter=".filter-card">Vestuário</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
+        </div>
+
+
+           
+            <div class="row mt-3 container col-md-12" data-aos="fade-up" data-aos-delay="400">
+              {% for p in produto_list %}
+                <div class="col-md-3 card portfolio-item filter-app">
+                  <div class="card-body" style="width: 100%;">       
+                      <img width="100%" src="{{ p.imagem.url }}" class="card-img-top img-fluid w-100 align-items-center" style="max-width: 300px; max-height: 300px; width: auto; height: auto; object-fit: contain;">
+                      <div class="portfolio-info card-body">
+                        <h4 class="card-title"><a href="{% url 'loja_app:ProdutoDetalhe' p.slug %}">{{ p.titulo }}</a></h4>
+                        <p>{{ p.categoria }}</p>
+                        <p>Preço: <strike> R$ {{ p.preco_mercado }} </strike> R$ {{ p.venda }} </p>
+                        <a href="{% url 'loja_app:addcarrinho' p.id %}" class="btn btn-success">Comprar</a>
+                      </div>              
+                  </div>
+                </div> 
+              {% endfor %}      
+            </div>
+
+
+
+
+            <nav aria-label="...">
+              <ul class="pagination">
+                {% if produto_list.has_previous %}
+
+                <li class="page-item">
+                  <a class="page-link" href="?page={{produto_list.previous_page_number}}">Anterior</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                {% endif %}
+                {% for i in produto_list.paginator.page_range %}
+                {% if i == produto_list.number %}
+                <li class="page-item active"><a class="page-link">{{i}}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if produto_list.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{produto_list.next_page_number}}">Próximo</a></li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próximo</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Contato</h2>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-about">
+              <h3>PWJ-Personalizados</h3>
+              <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+              <div class="social-links">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+            <div class="info">
+              <div>
+                <i class="ri-map-pin-line"></i>
+                <p>A108 Adam Street<br>New York, NY 535022</p>
+              </div>
+
+              <div>
+                <i class="ri-mail-send-line"></i>
+                <p>info@example.com</p>
+              </div>
+
+              <div>
+                <i class="ri-phone-line"></i>
+                <p>+1 5589 55488 55s</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-6 text-lg-left text-center">
+          <div class="copyright">
+            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+            <a href="#intro" class="scrollto">Home</a>
+            <a href="#about" class="scrollto">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

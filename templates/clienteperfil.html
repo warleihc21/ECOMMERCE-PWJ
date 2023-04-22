@@ -1,0 +1,104 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+    PWJ-Personalizados - Perfil
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container-fluid">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+                <div>
+
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" role="alert">
+                        <strong>{{message}}</strong>
+                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+
+                        <section>                   
+                    
+                            <h2 style="padding-bottom: 10px;" class="titulo">Perfil do Cliente</h2>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6 mb-5">
+                                    <h3 class="titulo">Detalhes</h3>
+                                    <p><span class="font-weight-bold">Nome: </span>{{cliente.nome_completo}}</p>
+                                    <p><span class="font-weight-bold">Usuário: </span>{{cliente.user.username}}</p>
+                                    <p><span class="font-weight-bold">Email: </span>{{cliente.user.email}}</p>
+                                    <p><span class="font-weight-bold">Endereço: </span>{{cliente.endereco}}</p>
+                                    <p><span class="font-weight-bold">Cadatrado em: </span>{{cliente.data_on}}</p>
+
+                                </div>
+
+                                <hr>
+                            
+
+                                <div class="col-md-12">
+                                    <h3>Compras anteriores</h3>
+                                    <br>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Pedido ID</th>
+                                                <th>Valor</th>
+                                                <th>Data do Pedido</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for pedidos in pedidos %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+
+
+
+                                                <td><a href="{% url 'loja_app:clientepedidodetalhe' pedidos.pk %}"> Pedido_Numero_{{pedidos.id}}</td></a>
+                                                <td>{{pedidos.total}}</td>
+                                                <td>{{pedidos.criado_em}} Atras</td>
+                                                <td>{{pedidos.pedido_status}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

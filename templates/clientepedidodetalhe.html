@@ -1,0 +1,102 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+    PWJ - Detalhes do pedido
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container-fluid">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+                <div>
+
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}" role="alert">{{message}}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <section>                   
+                    
+                            <h2 style="padding-bottom: 10px;" class="titulo">Detalhes do pedido</h2>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-12 mx-auto">
+                                    <p><span class="font-weight-bold"></span><samp>Produto ID:   </samp><samp>Pedido_{{pedido_obj.id}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Status do pedido:   </samp><samp>{{pedido_obj.pedido_status}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Data do pedido:   </samp><samp>{{pedido_obj.criado_em}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Informação do cliente:   </samp><samp>{{pedido_obj.solicitante}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Telefone do cliente:   </samp><samp>{{pedido_obj.telefone}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Endereço do cliente:   </samp><samp>{{pedido_obj.endereco_envio}}</p></samp> 
+                                    <p><span class="font-weight-bold"></span><samp>Email:   </samp><samp>{{pedido_obj.email}}</p></samp> 
+                                    <hr>
+                                    <h4 class="mt-4">Itens do Pedido</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Item</th>
+                                                <th>Valor</th>
+                                                <th>Quantidade</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for cp in pedido_obj.carrinho.carrinhoproduto_set.all %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td><a target="blank" href="{% url 'loja_app:ProdutoDetalhe' cp.produto.slug %}">{{cp.produto.titulo}}{{cp.produto.id}}</a></td>
+                                                <td>{{cp.valor}}</td>
+                                                <td>{{cp.quantidade}}</td>
+                                                <td>{{cp.subtotal}}</td>
+                                                
+                                            </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <th colspan="4" class="text-aling-right">Valor Total:</th>
+                                                <th>R$ {{pedido_obj.total}}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+
+                                </div>                                
+                            </div>
+
+                        </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

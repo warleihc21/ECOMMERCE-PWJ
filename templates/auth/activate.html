@@ -1,0 +1,9 @@
+{% autoescape off %}
+    <br>
+    Ola <br> {{ user.username }}
+    
+    Por favor click neste link para verificar sua conta.
+    <br>
+    http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+    <br>
+{% endautoescape %}

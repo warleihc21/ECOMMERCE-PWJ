@@ -1,0 +1,99 @@
+{% extends "admin_paginas/adminbase.html" %}
+
+{% block title %}
+    PWJ-Personalizados - Cadastro de produto
+{% endblock title %}
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+    <section id="" class="">
+        <div class="container" data-aos="fade-up" data-aos-delay="400" style="margin-top: 50px;">
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}" role="alert">{{message}}</div>
+                            {% endfor %}
+                        {% endif %}
+            <div class="section-title border shadow" data-aos="fade-up">
+                    <div style="padding: 150px;">
+                        <h1 data-aos="fade-up">Cadastro de produto</h1>
+                        <div data-aos="fade-up" data-aos-delay="400"></div>
+                    
+                            <form action="{% url 'loja_app:add_produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="">Imagens:</label>
+                                        <input class="form-control col-md-6" type="file" name="imagens" multiple>
+                                        <br>
+                                        <br>
+                                        <label for="">Nome do produto:</label>
+                                        <input class="form-control col-md-6" type="text" name="titulo">
+                                        <br>
+                                        <br>
+                                        <label for="">Selecione a categoria:</label>
+                                        <select class="form-control col-md-6" name="categoria" id="">
+                                            {% for categoria in categorias %}
+                                                <option value="{{categoria.id}}">{{categoria.titulo}}</option>
+                                            {% endfor %}        
+                                        </select>
+                                        <br>
+                                        <br>
+                                        <label for="">Preço de compra:</label>
+                                        <input class="form-control col-md-6" type="number" name="preco_compra">
+                                        <br>
+                                        <br>
+                                        <label for="">Preço de mercado:</label>
+                                        <input class="form-control col-md-6" type="number" name="preco_mercado">
+                                        <br>
+                                        <br>
+                                        <label for="">Preço de venda:</label>
+                                        <input class="form-control col-md-6" type="number" name="venda">
+                                        <br>
+                                        <br>
+                                        <label for="">Descrição:</label>
+                                        <textarea class="form-control col-md-6" type="textarea" name="descricao" rows="3"></textarea>
+                                        <br>
+                                        <br>
+                                        <label for="">Garantia:</label>
+                                        <input class="form-control col-md-6" type="text" name="garantia">
+                                        <br>
+                                        <br>
+                                        <label for="">Politica de devolução:</label>
+                                        <input class="form-control col-md-6" type="text" name="return_devolucao">
+                                        <br>
+                                        <br>
+                                        <label for="">Definir código do produto:</label>
+                                        <input class="form-control" type="text" name="slug">
+                                        <br>
+                                        <br>
+                                        <input class="btn btn-success" type="submit" value="Cadastrar">
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

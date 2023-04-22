@@ -1,0 +1,95 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+    PWJ-Personalizados - Cadastro
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+                <div class="form-group col-md-6 ">
+                    <br>
+                    <h1 data-aos="fade-up">Cadastrar</h1>
+                    <div class="container-fluid" data-aos="fade-up" data-aos-delay="400"></div>
+
+
+                    {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                            <div class="alert {{message.tags}}">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+
+                        <section>
+                    
+                    
+                            <h2 style="padding-bottom: 10px;" class="titulo">Seja bem vindo</h2>
+                            <form class="form-container form-bg-login" action="{% url 'cadastro' %}" method="POST">{% csrf_token %}                                
+                                
+                                <div class="form-group mt-3">
+                                    <label for="">Nome de Usuário</label>
+                                    <input type="text" placeholder="Digite seu Usuário..." name="usuario" class="form-control input-form" required>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">E-mail</label>
+                                    <input type="email" placeholder="Digite seu E-mail..." name="email" class="form-control input-form" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md form-group mt-3">
+                                        <label for="">Senha</label>
+                                        <input type="password" placeholder="Digite sua senha..." name="senha" class="form-control input-form" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md form-group mt-3">
+                                        <label for="">Confirmar senha</label>
+                                        <input type="password" placeholder="Repita sua senha..." name="confirmar_senha" class="form-control input-form" required>
+                                    </div>
+                                </div>
+            
+                                    <input type="submit" class="btn  btn-outline-success btn-lg mt-4">
+            
+                            </form>
+                            <h4 style="bottom: 50px; padding-top: 30px; font-weight: bold">Já possui uma conta? <a href="/autenticacao/login/" class="btn btn-outline-success btn-lg mt-4">Logar</a> </h4>
+                        </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

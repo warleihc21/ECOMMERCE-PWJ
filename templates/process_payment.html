@@ -1,0 +1,74 @@
+{% extends 'nav.html' %}
+
+{% block title %}
+    PWJ - Detalhes do pedido
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: green;
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+<section id="contact" class="contact">
+    <div class="container-fluid">
+        <div class="section-title" data-aos="fade-up">
+            <div class="row d-flex justify-content-center">
+                <div>
+
+                        {% if messages %}
+                            <br>
+                            {% for message in messages %}
+                                <div class="alert {{message.tags}}" role="alert">{{message}}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <section>                   
+                    
+                            <form action="{% url 'loja_app:process_payment' %}" method="POST">
+                                {% csrf_token %}
+
+                                <input type="text" name="amount" placeholder="Valor em centavos">
+                                <script
+                                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                  data-key="{{ STRIPE_PUB_KEY }}"
+                                  data-amount="5000"
+                                  data-name="Minha empresa"
+                                  data-description="Pagamento de teste"
+                                  data-image="/img/logo.png"
+                                  data-locale="auto"
+                                  data-currency="usd">
+                                </script>
+                            </form>
+
+                        </section>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+
+                
+ {% endblock body %}

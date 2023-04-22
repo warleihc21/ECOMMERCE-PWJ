@@ -1,0 +1,76 @@
+{% extends 'nav.html' %}
+
+{% load static %}
+
+{% load filters %}
+
+{% block title %}
+    PWJ-Personalizados - Login
+{% endblock title %}
+
+
+{% block style %}
+    <style>
+        .btn {
+            font-family: "Ralaway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: 0.55s;
+            color: rgb(255, 255, 255);
+            background-color: rgb(3, 95, 0);
+          
+        }
+    </style>
+
+
+{% endblock style %}
+
+
+{% block body %}
+
+
+<section d="home" class="d-flex">
+    <div class="container-fluid mt-100 mw-100 align-self-center">
+        <h1 style="background-color: #32CD32;
+        color: white;
+        font-weight: bold;
+        font-size: 3em;
+        margin-top: 20px;
+        padding: 30px;">A EMPRESA</h1>
+    </div>
+</section>
+
+<section d="home" class="d-flex" style="padding: 20px;">
+    <div class="container mb-50 mw-100 align-self-center">                
+        <div class="row">
+            <div class="principal col-md-6">
+                <p style="text-align: justify; font-size: 30px;">
+                    O <span style="color: red;">fornecedor de brindes PWJ Personalizados</span>
+                    só trabalha com produtos promocionais. Esta é a nossa especialidade, é o que gostamos e o que sabemos fazer. Assim, na hora de orçar, escolher, planejar e produzir, você vai ter ao seu lado uma equipe com larga experiência e visão criativa para selecionar e sugerir os brindes mais adequados ao seu orçamento e objetivos de comunicação. Desde o pedido até a entrega em qualquer ponto do Brasil, a Davanas põe toda essa experiência à sua disposição.
+                </p> 
+                <p style="text-align: justify; font-size: 30px;">
+                    A Davanas foi criada há 30 anos e se especializou na fabricação e importação de Brindes e Presentes corporativos. Ela é hoje uma das referências no mercado brasileiro de brindes e gifts corporativos. Com intensa atividade de pesquisa e busca de novos produtos, a Davanas busca entre os mais expressivos fornecedores as últimas novidades e os melhores brindes corporativos e promocionais. Brindes Criativos são o foco principal de nossa produção. Atendimento eficiente, pontualidade na entrega, qualidade dos produtos, garantia pré-venda são as marcas de nossos serviços e produtos.
+                </p>                       
+            </div>
+            <div class="principal col-md-6">
+                <img src="{% static 'assets/img/logo/image1.png' %}" alt="imagem1" class="img-fluid" width="1550">                       
+            </div>
+            <div class="principal col-md-6">
+                <img src="{% static 'assets/img/logo/Pillows_On_The_Sofa_MockupsForFree.png' %}" alt="imagem1" class="img-fluid" width="1550">                       
+            </div>                     
+        </div>
+    </div>
+</section>
+
+
+
+
+    
+
+                
+{% endblock body %}
+
